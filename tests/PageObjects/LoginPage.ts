@@ -11,7 +11,13 @@ export class LoginPage {
 
   async gotoLoginPage() {
     await this.page.goto(this.loginUrl);
+  }
+
+  async assertPageVisible() {
     await expect(this.page.getByText("Swag Labs")).toBeVisible();
+    await expect(this.page.locator('[data-test="username"]')).toBeVisible();
+    await expect(this.page.locator('[data-test="password"]')).toBeVisible();
+    await expect(this.page.locator('[data-test="login-button"]')).toBeVisible();
   }
 
   async typeUsername(username: string) {
