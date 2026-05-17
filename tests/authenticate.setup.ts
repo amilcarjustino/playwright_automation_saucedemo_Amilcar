@@ -5,5 +5,8 @@ import { ProductsPage } from "./PageObjects/ProductsPage";
 setup("authenticate standard user", async ({ page }) => {
   const loginPage = new LoginPage(page);
   const productsPage = new ProductsPage(page);
-  await loginPage.authenticateStandardUser(async () => productsPage.assertPageVisible());
+  const assertLoginSuccessFunction = async () =>
+    productsPage.assertPageVisible();
+
+  await loginPage.authenticateStandardUser(assertLoginSuccessFunction);
 });
