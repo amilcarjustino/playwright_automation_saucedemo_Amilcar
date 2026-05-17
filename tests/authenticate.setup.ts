@@ -4,8 +4,6 @@ import { ProductsPage } from "./PageObjects/ProductsPage";
 
 setup("authenticate standard user", async ({ page }) => {
   const loginPage = new LoginPage(page);
-  await loginPage.authenticateStandardUser();
-
   const productsPage = new ProductsPage(page);
-  await productsPage.assertPageVisible();
+  await loginPage.authenticateStandardUser(async () => productsPage.assertPageVisible());
 });

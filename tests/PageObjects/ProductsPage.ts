@@ -8,11 +8,11 @@ export class ProductsPage {
   }
 
   async goto() {
-    await this.page.goto("https://www.saucedemo.com/inventory.html");
+    await this.page.goto("/inventory.html");
   }
 
   async assertPageVisible() {
-    await expect(this.page).toHaveURL("https://www.saucedemo.com/inventory.html");
+    await expect(this.page).toHaveURL("/inventory.html");
     await expect(this.page.getByText("Swag Labs")).toBeVisible();
     await expect(this.page.getByText("Products")).toBeVisible();
   }

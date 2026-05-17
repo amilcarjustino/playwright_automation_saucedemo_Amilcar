@@ -1,5 +1,6 @@
 import { expect, Locator, Page } from "@playwright/test";
 import { users } from "../testData/users";
+import type { VoidCallbackFunction } from "../support/types";
 
 const authFile = ".auth/authStandardUser.json";
 const LOGIN_URL = "/";
@@ -19,9 +20,7 @@ export class LoginPage {
 
   constructor(page: Page) {
     this.page = page;
-    this.locatorPageHeader = page.getByRole("heading", {
-      name: LOGIN_HEADER_TITLE,
-    });
+    this.locatorPageHeader = page.getByText(LOGIN_HEADER_TITLE);
     this.locatorUsernameInput = page.locator(USERNAME_SELECTOR);
     this.locatorPasswordInput = page.locator(PASSWORD_SELECTOR);
     this.locatorLoginButton = page.locator(LOGIN_BUTTON_SELECTOR);
@@ -45,18 +44,11 @@ export class LoginPage {
     await this.locatorLoginButton.click();
   }
 
-  async authenticateStandardUser() {
+  async authenticateStandardUser(postLoginAssertion: VoidCallbackFunction) {
     const { username, password } = users.standard;
     await this.login(username, password);
-
-    // Wait until the page receives the cookies.
-    //
-    // Sometimes login flow sets cookies in the process of several redirects.
     // Wait for the final URL to ensure that the cookies are actually set.
-
-    // Alternatively, you can wait until the page reaches a state where all cookies are set.
-
-    // End of authentication steps.
+    await postLoginAssertion();
 
     await this.page.context().storageState({ path: authFile });
   }
