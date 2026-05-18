@@ -9,15 +9,42 @@ Automated end-to-end test suite for the SauceDemo application using Playwright a
 # 1. Install dependencies
 npm install
 
-# 2. Run all tests
+# 2. Copy environment config and update if needed
+cp .env.example .env
+
+# 3. Run all tests
 npx playwright test
 
-# 3. View test report
+# 4. View test report
 npx playwright show-report
 
-# 4. Run tests in UI mode (interactive)
+# 5. Run tests in UI mode (interactive)
 npx playwright test --ui
 ```
+
+## ⚙️ Environment Configuration
+
+This project loads local environment variables from a `.env` file at runtime.
+
+- Copy `.env.example` to `.env` before running tests.
+- The configuration is loaded in `playwright.config.ts` using `dotenv.config()`.
+- `BASE_URL` is read from the `.env` file and used as the Playwright `baseURL`.
+- If `BASE_URL` is not set, the default value is `https://www.saucedemo.com`.
+
+Example `.env` contents:
+
+```env
+BASE_URL=https://www.saucedemo.com
+```
+
+## 🔐 Auth Storage Configuration
+
+The project uses Playwright auth storage state to persist a logged-in session for the standard user.
+
+- Login flow and storage capture are implemented in `tests/PageObjects/LoginPage.ts`.
+- After a successful login, `page.context().storageState({ path: '.auth/authStandardUser.json' })` saves the browser context cookies and local storage.
+- The `tests/authenticate.setup.ts` file runs a dedicated setup to authenticate the standard user once before the browser projects execute.
+- This means browser projects can reuse the authenticated state and avoid repeating login actions during test execution.
 
 ## 📋 Project Structure
 
