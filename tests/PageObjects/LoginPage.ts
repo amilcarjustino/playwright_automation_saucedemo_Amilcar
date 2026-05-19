@@ -9,6 +9,7 @@ const LOGIN_HEADER_TITLE = "Swag Labs";
 const USERNAME_SELECTOR = '[data-test="username"]';
 const PASSWORD_SELECTOR = '[data-test="password"]';
 const LOGIN_BUTTON_SELECTOR = '[data-test="login-button"]';
+const ERROR_MESSAGE_SELECTOR = '[data-test="error"]';
 
 export class LoginPage {
   readonly page: Page;
@@ -17,6 +18,7 @@ export class LoginPage {
   readonly locatorUsernameInput: Locator;
   readonly locatorPasswordInput: Locator;
   readonly locatorLoginButton: Locator;
+  readonly locatorErrorMessage: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -24,6 +26,7 @@ export class LoginPage {
     this.locatorUsernameInput = page.locator(USERNAME_SELECTOR);
     this.locatorPasswordInput = page.locator(PASSWORD_SELECTOR);
     this.locatorLoginButton = page.locator(LOGIN_BUTTON_SELECTOR);
+    this.locatorErrorMessage = page.locator(ERROR_MESSAGE_SELECTOR);
   }
 
   async gotoLoginPage() {
@@ -35,6 +38,11 @@ export class LoginPage {
     await expect(this.page).toHaveURL(this.loginUrl);
     await expect(this.locatorPageHeader).toBeVisible();
     await expect(this.locatorLoginButton).toBeVisible();
+  }
+
+  async assertLoginErrorMessageVisible(expectedMessage: string) {
+    await this.assertPageVisible();
+    await expect(this.locatorErrorMessage).toHaveText(expectedMessage);
   }
 
   async login(username: string, password: string) {
