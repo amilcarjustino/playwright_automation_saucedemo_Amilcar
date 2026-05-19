@@ -36,26 +36,26 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
-      name: "login",
+      name: "login setup",
       testMatch: "**/*.setup.ts",
     },
 
     {
       name: "chromium",
       use: { ...devices["Desktop Chrome"], storageState: ".auth/authStandardUser.json", },
-      dependencies: ["login"],
+      dependencies: ["login setup"],
     },
 
     {
       name: "firefox",
       use: { ...devices["Desktop Firefox"], storageState: ".auth/authStandardUser.json", },
-      dependencies: ["login"],
+      dependencies: ["login setup"],
     },
 
     {
       name: "webkit",
       use: { ...devices["Desktop Safari"], storageState: ".auth/authStandardUser.json", },
-      dependencies: ["login"],
+      dependencies: ["login setup"],
     },
 
     /* Test against mobile viewports. */
