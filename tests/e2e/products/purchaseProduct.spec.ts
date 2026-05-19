@@ -5,7 +5,6 @@ import { CheckoutInformationPage } from "../../PageObjects/CheckoutInformationPa
 import { CheckoutConfirmationPage } from "../../PageObjects/CheckoutConfirmationPage";
 import { CheckoutOverviewPage } from "../../PageObjects/CheckoutOverview";
 
-
 test.describe("Product purchase", () => {
   test("Purchase a product", async ({ page }) => {
     const product = {
@@ -17,7 +16,7 @@ test.describe("Product purchase", () => {
       paymentInformation: "SauceCard #31337",
       shippingInformation: "Free Pony Express Delivery!",
       itemTotal: 29.99,
-      tax: 2.40,
+      tax: 2.4,
     };
     const userInformation = {
       firstName: "Amil",
