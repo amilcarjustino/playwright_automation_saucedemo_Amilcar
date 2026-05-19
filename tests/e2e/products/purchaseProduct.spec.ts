@@ -5,10 +5,6 @@ import { CheckoutInformationPage } from "../../PageObjects/CheckoutInformationPa
 import { CheckoutConfirmationPage } from "../../PageObjects/CheckoutConfirmationPage";
 import { CheckoutOverviewPage } from "../../PageObjects/CheckoutOverview";
 
-// test.beforeEach(async ({ page }) => {
-//   const loginPage = new LoginPage(page);
-//   await loginPage.gotoLoginPage();
-// });
 
 test.describe("Product purchase", () => {
   test("Purchase a product", async ({ page }) => {
