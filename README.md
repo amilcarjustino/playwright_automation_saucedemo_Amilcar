@@ -28,6 +28,9 @@ npx playwright show-report
 
 # 6. Run tests in UI mode (interactive)
 npx playwright test --ui
+
+# 7. Stress-test a specific file to find flaky behavior
+npx playwright test tests/e2e/products/purchaseProduct.spec.ts --repeat-each=100 -x
 ```
 
 ## ⚙️ Environment Configuration
