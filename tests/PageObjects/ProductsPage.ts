@@ -7,7 +7,6 @@ const ADD_TO_CART_BUTTON_NAME = "Add to cart";
 const INVENTORY_ITEM_DESCRIPTION_SELECTOR =
   '[data-test="inventory-item-description"]';
 const SHOPPING_CART_LINK_SELECTOR = '[data-test="shopping-cart-link"]';
-const FIRST_PRODUCT_DESCRIPTION = "Sauce Labs Backpack";
 
 export class ProductsPage {
   readonly page: Page;
@@ -31,10 +30,10 @@ export class ProductsPage {
     await expect(this.locatorProductsTitle).toBeVisible();
   }
 
-  async addFirstProductToCart() {
+  async addProductToCart(productName: string) {
     const product = this.page
       .locator(INVENTORY_ITEM_DESCRIPTION_SELECTOR)
-      .filter({ hasText: FIRST_PRODUCT_DESCRIPTION });
+      .filter({ hasText: productName });
     await product
       .getByRole("button", { name: ADD_TO_CART_BUTTON_NAME })
       .click();
